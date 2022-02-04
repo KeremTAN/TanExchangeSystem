@@ -1,6 +1,6 @@
 package Models.Banks;
 
-import Models.EMoney;
+import Models.Markets.EMoney;
 import Models.StrategyMoney.IExchangeMoney;
 import java.text.DecimalFormat;
 import java.util.Map;

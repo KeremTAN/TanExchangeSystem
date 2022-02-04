@@ -1,21 +1,21 @@
 package Models.StrategyCoins;
 
-import Models.ECoins;
-import Models.Markets.MarketsOfCoins;
+import Models.Markets.ECoins;
+//import Models.Markets.MarketsOfCoins;
 public class EthCoinExch implements  IExchangeCoins {
     @Override
     public double convertToUSDT(double coinQuantity) {
-        return coinQuantity*MarketsOfCoins.getETH();
+        return coinQuantity*ECoins.getETH();
     }
 
     @Override
     public double convertToCoin(double usdtQuantity) {
-        return usdtQuantity/MarketsOfCoins.getETH();
+        return usdtQuantity/ECoins.getETH();
     }
 
     @Override
     public double getCoinValue() {
-        return MarketsOfCoins.getETH();
+        return ECoins.getETH();
     }
 
     @Override

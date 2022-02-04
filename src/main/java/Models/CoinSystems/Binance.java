@@ -1,6 +1,6 @@
 package Models.CoinSystems;
 
-import Models.ECoins;
+import Models.Markets.ECoins;
 import java.util.HashMap;
 import java.util.Map;
 

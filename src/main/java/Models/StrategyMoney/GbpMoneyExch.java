@@ -1,22 +1,21 @@
 package Models.StrategyMoney;
 
-import Models.EMoney;
-import Models.Markets.MarketsOfMoney;
+import Models.Markets.EMoney;
 
 public class GbpMoneyExch implements IExchangeMoney {
     @Override
     public double convertToTRY(double currencyQuantity) {
-        return currencyQuantity* MarketsOfMoney.getGBP();
+        return currencyQuantity* EMoney.getGBP();
     }
 
     @Override
     public double convertToCurrency(double tryQuantity) {
-        return tryQuantity/MarketsOfMoney.getCHF();
+        return tryQuantity/EMoney.getCHF();
     }
 
     @Override
     public double getMoneyValue() {
-        return MarketsOfMoney.getCHF();
+        return EMoney.getCHF();
     }
 
     @Override

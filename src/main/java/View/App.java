@@ -13,7 +13,8 @@ public class App {
                 new Customer("Muvakkit Nuri", "Efendi","98877744555","Manisa","5879865478","muvakkitnuriefendi@mail.com",5.7,false,60, false)
                 //,new Customer(null,null,null,null,null,null,)
         };
-        System.out.println();
+        //System.out.println(EMoney.getGold());
+
         facade.printAllGains();
 
         System.out.println("          SCENARIO 1          \n");
@@ -40,7 +41,7 @@ public class App {
         facade.customerSellsCurrency(cus, 250);
         facade.printInfo(cus);
 
-/*        ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
 
         System.out.println("\n           SCENARIO 3         \n ");
         cus = allCustomers[2];
@@ -64,11 +65,11 @@ public class App {
         facade.customerSellsCurrency(cus,200);
         facade.customerBuysCoin(cus, 500);
         facade.customerBuysCurrency(cus,1000);
-        facade.printInfo(cus);*/
+        facade.printInfo(cus);
 
         ///////////////////////////////////////////////////
         System.out.println();
-        facade.printAllGains();
+       facade.printAllGains();
 
 
 

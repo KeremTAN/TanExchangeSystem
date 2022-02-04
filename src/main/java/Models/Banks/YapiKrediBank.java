@@ -1,6 +1,6 @@
 package Models.Banks;
 
-import Models.EMoney;
+import Models.Markets.EMoney;
 import java.util.HashMap;
 import java.util.Map;
 

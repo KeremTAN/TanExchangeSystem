@@ -1,21 +1,21 @@
 package Models.StrategyCoins;
 
-import Models.ECoins;
-import Models.Markets.MarketsOfCoins;
+import Models.Markets.ECoins;
+//import Models.Markets.MarketsOfCoins;
 public class AlgoCoinExch implements IExchangeCoins {
     @Override
     public double convertToUSDT(double coinQuantity) {
-        return coinQuantity*MarketsOfCoins.getALGO();
+        return coinQuantity*ECoins.getALGO();
     }
 
     @Override
     public double convertToCoin(double usdtQuantity) {
-        return usdtQuantity/MarketsOfCoins.getALGO();
+        return usdtQuantity/ECoins.getALGO();
     }
 
     @Override
     public double getCoinValue() {
-        return MarketsOfCoins.getALGO();
+        return ECoins.getALGO();
     }
 
     @Override

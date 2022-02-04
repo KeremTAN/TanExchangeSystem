@@ -5,11 +5,10 @@ import Models.Banks.TurkiyeCumIsBank;
 import Models.Banks.YapiKrediBank;
 import Models.CoinSystems.ACoinSystem;
 import Models.CoinSystems.Binance;
-import Models.CoinSystems.ACoinSystem;
 import Models.CoinSystems.KuCoin;
 import Models.Customer;
-import Models.ECoins;
-import Models.EMoney;
+import Models.Markets.ECoins;
+import Models.Markets.EMoney;
 import Models.StrategyCoins.*;
 import Models.StrategyMoney.*;
 

@@ -1,6 +1,6 @@
 package Models.StrategyMoney;
 
-import Models.EMoney;
+import Models.Markets.EMoney;
 
 public interface IExchangeMoney {
     double convertToTRY(double currencyQuantity);

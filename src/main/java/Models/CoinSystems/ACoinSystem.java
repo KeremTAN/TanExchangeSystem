@@ -1,7 +1,7 @@
 package Models.CoinSystems;
 
 import Models.AdapterUsdt;
-import Models.ECoins;
+import Models.Markets.ECoins;
 import Models.StrategyCoins.IExchangeCoins;
 import Models.StrategyCoins.UsdtCoinEXch;
 

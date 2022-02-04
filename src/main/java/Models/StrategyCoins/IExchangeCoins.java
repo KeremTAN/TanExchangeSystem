@@ -1,6 +1,6 @@
 package Models.StrategyCoins;
 
-import Models.ECoins;
+import Models.Markets.ECoins;
 public interface IExchangeCoins {
     //double convertToTRY(double currencyQuantity);
     double convertToUSDT(double coinQuantity);

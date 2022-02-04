@@ -1,11 +1,7 @@
 package Models.CoinSystems;
 
-import Models.AdapterUsdt;
-import Models.ECoins;
-import Models.StrategyCoins.IExchangeCoins;
-import Models.StrategyCoins.UsdtCoinEXch;
+import Models.Markets.ECoins;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 

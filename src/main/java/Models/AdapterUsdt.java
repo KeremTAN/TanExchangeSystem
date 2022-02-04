@@ -1,6 +1,8 @@
 package Models;
 
-import Models.Markets.MarketsOfCoins;
+//import Models.Markets.MarketsOfCoins;
+import Models.Markets.ECoins;
+import Models.Markets.EMoney;
 import Models.StrategyCoins.UsdtCoinEXch;
 import Models.StrategyMoney.IExchangeMoney;
 
@@ -23,7 +25,7 @@ public class AdapterUsdt implements IExchangeMoney {
 
     @Override
     public double getMoneyValue() {
-        return MarketsOfCoins.getUSDT();
+        return ECoins.getUSDT();
     }
 
     @Override

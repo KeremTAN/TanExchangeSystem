@@ -2,6 +2,8 @@ package Models;
 
 import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
+import Models.Markets.ECoins;
+import Models.Markets.EMoney;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;

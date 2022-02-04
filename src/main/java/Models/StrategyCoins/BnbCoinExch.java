@@ -1,21 +1,21 @@
 package Models.StrategyCoins;
 
-import Models.ECoins;
-import Models.Markets.MarketsOfCoins;
+import Models.Markets.ECoins;
+//import Models.Markets.MarketsOfCoins;
 public class BnbCoinExch implements IExchangeCoins {
     @Override
     public double convertToUSDT(double coinQuantity) {
-        return coinQuantity*MarketsOfCoins.getBNB();
+        return coinQuantity*ECoins.getBNB();
     }
 
     @Override
     public double convertToCoin(double usdtQuantity) {
-        return usdtQuantity/MarketsOfCoins.getBNB();
+        return usdtQuantity/ECoins.getBNB();
     }
 
     @Override
     public double getCoinValue() {
-        return MarketsOfCoins.getBNB();
+        return ECoins.getBNB();
     }
 
     @Override
