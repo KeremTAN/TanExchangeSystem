@@ -2,8 +2,7 @@ package Models;
 
 import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
-import Models.Markets.ECoins;
-import Models.Markets.EMoney;
+import Models.Markets.*;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -63,7 +62,7 @@ public class Customer {
                 setBalance(money,currency);
                 System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(currency)+" "+money.toString()+" from "+processBank.getName());
             }
-            else System.out.println("-/ There is not enough TRY on your account for buying("+money.toString()+") from the Bank");
+            else System.out.println("!/ There is not enough TRY on your account for buying("+money.toString()+") from the Bank");
         }
     }
 
@@ -71,13 +70,13 @@ public class Customer {
         if (balance.containsKey(money)) {
             if (currencyQuantity <= balance.get(money)) {
                 balance.replace(money,balance.get(money)-currencyQuantity);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(currencyQuantity)+" "+money.toString()+" to "+processBank.getName());
+                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(currencyQuantity)+" "+money.toString()+" to "+processBank.getName());
                 double tryQ = processBank.buyMoney(currencyQuantity);
                 setBalance(EMoney.TRY,tryQ);
             }
-            else System.out.println("-/ There is not enough money("+money.toString()+") on your account for selling to the Bank");
+            else System.out.println("!/ There is not enough money("+money.toString()+") on your account for selling to the Bank");
         }
-        else System.out.println("-/ You do not have money("+money.toString()+") for selling");
+        else System.out.println("!/ You do not have money("+money.toString()+") for selling");
     }
 
     public void buyCoinFromSystem(ECoins coin, double usdtQuantity, ACoinSystem processSystem) {
@@ -88,22 +87,22 @@ public class Customer {
                 setCoins(coin,currency);
                 System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(currency)+" "+coin.toString()+" from "+processSystem.getName());
             }
-            else System.out.println("-/ There is not enough USDT on your account for buying("+coin.toString()+") from the Bank");
+            else System.out.println("!/ There is not enough USDT on your account for buying("+coin.toString()+") from the CoinSystem");
         }
-        else System.out.println("-/ You do not have "+coin.toString()+" for buying");
+        else System.out.println("!/ You do not have "+coin.toString()+" for buying");
     }
 
     public void sellCoinToSystem(ECoins coin, double coinQuantity, ACoinSystem processSystem) {
         if (coins.containsKey(coin)) {
             if (coinQuantity <= coins.get(coin)) {
                 coins.replace(coin,coins.get(coin)-coinQuantity);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(coinQuantity)+" "+coin.toString()+" to "+processSystem.getName());
+                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(coinQuantity)+" "+coin.toString()+" to "+processSystem.getName());
                 double usdt = processSystem.buyCoin(coinQuantity);
                 setCoins(ECoins.USDT,usdt);
             }
-            else System.out.println("-/ There is not enough money("+coin.toString()+") on your account for selling to the Bank");
+            else System.out.println("!/ There is not enough money("+coin.toString()+") on your account for selling to the CoinSystem");
         }
-        else System.out.println("-/ You do not have money("+coin.toString()+") for selling");
+        else System.out.println("!/ You do not have money("+coin.toString()+") for selling");
     }
 
     public void buyUsdt(double tryQuantity, ACoinSystem processSystem){
@@ -114,16 +113,16 @@ public class Customer {
                 setCoins(ECoins.USDT, usdt);
                 System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(usdt)+" USDT from "+processSystem.getName());
             }
-            else System.out.println("-/ There is not enough TRY on your account for buying(USDT) from the Bank");
+            else System.out.println("!/ There is not enough TRY on your account for buying(USDT) from the CoinSystem");
         }
-        else System.out.println("-/ You do not have TRY for buying");
+        else System.out.println("!/ You do not have TRY for buying");
     }
 
     public void sellUsdt(double usdtQuantity, ACoinSystem processSystem){
         if (coins.containsKey(ECoins.USDT)) {
             if (usdtQuantity <= coins.get(ECoins.USDT)) {
                 coins.replace(ECoins.USDT, coins.get(ECoins.USDT) - usdtQuantity);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(usdtQuantity)+" USDT to "+processSystem.getName());
+                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(usdtQuantity)+" USDT to "+processSystem.getName());
                 double tryQ = processSystem.usdtConvertToTry(usdtQuantity);
                 setBalance(EMoney.TRY,tryQ);
             }
