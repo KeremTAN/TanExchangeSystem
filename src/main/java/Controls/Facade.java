@@ -6,20 +6,12 @@ import Models.Customer;
 import Models.Factory.*;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
-
 import java.util.Random;
 
 public class Facade {
     private static Facade instance;
-//    private Customer customer;
-
     private ABanks processBank;
-//    private BankFactory factoryBank = new BankFactory();
-//    private MoneyFactory factoryMoney = new MoneyFactory();
-
     private ACoinSystem processCoinSystem;
-//    private CoinSystemsFactory factoryCoinSystem = new CoinSystemsFactory();
-//    private CoinFactory factoryCoin = new CoinFactory();
     private Random r = new Random();
 
 /*
@@ -69,10 +61,6 @@ public class Facade {
 
     }
 
-//    private ABanks chooseBank(){} //chooseBank()
-
-//    private EMoney chooseProcessMoney(){} // chooseProcessMoney()
-
     /** COIN SYSTEMS **/
 
     public void customerBuysUsdt(Customer customer, double tryQuantity){
@@ -99,12 +87,8 @@ public class Facade {
         customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
 
     }
-
-//    private ACoinSystem chooseCoinSystem(){} //chooseBank()
-
-//    private ECoins chooseProcessCoin(){} // chooseProcessCoin()
-
-    /** DECOR FOR MAIN **/
+/*
+    /** DECOR FOR MAIN
     private void processTimeDash(){
         String info ="-------------------------------------------------";
         for(int index=0; index<info.length();index++) {
@@ -130,6 +114,7 @@ public class Facade {
         }
         System.out.println("");
     }
+ */
 
 } // FACADE
 
