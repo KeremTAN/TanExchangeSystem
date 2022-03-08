@@ -1,7 +1,7 @@
 package Models.StrategyCoins;
 
 import Models.Markets.ECoins;
-//import Models.Markets.MarketsOfCoins;
+
 public class BnbCoinExch implements IExchangeCoins {
     @Override
     public double convertToUSDT(double coinQuantity) {

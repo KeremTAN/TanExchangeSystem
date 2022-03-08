@@ -1,7 +1,6 @@
 package Models.StrategyMoney;
 
 import Models.Markets.EMoney;
-//import Models.Markets.MarketsOfMoney;
 
 public class ChfMoneyExch implements IExchangeMoney{
     @Override

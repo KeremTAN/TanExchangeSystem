@@ -1,6 +1,5 @@
 package Models;
 
-//import Models.Markets.MarketsOfCoins;
 import Models.Markets.ECoins;
 import Models.Markets.EMoney;
 import Models.StrategyCoins.UsdtCoinEXch;

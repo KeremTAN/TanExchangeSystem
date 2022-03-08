@@ -2,7 +2,7 @@ package Controls;
 
 import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
-import Models.Customer;
+import Models.Customer.Customer;
 import Models.Factory.*;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
@@ -51,7 +51,6 @@ public class Facade {
         processBank = new BankFactory().setBank();
         EMoney m = new MoneyFactory().setMoney(processBank);
         customer.buyMoneyFromBank(m, tryQuantity, processBank);
-
     }
 
     public void customerSellsCurrency(Customer customer, double currencyQuantity){
@@ -87,34 +86,6 @@ public class Facade {
         customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
 
     }
-/*
-    /** DECOR FOR MAIN
-    private void processTimeDash(){
-        String info ="-------------------------------------------------";
-        for(int index=0; index<info.length();index++) {
-            try {
-                Thread.sleep(2);
-                System.out.print(info.charAt(index));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("");
-    }
-
-    private void processTimeStar(){
-        String info ="*************************************************";
-        for(int index=0; index<info.length();index++) {
-            try {
-                Thread.sleep(2);
-                System.out.print(info.charAt(index));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("");
-    }
- */
 
 } // FACADE
 

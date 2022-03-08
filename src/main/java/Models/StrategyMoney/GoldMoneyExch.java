@@ -2,6 +2,7 @@ package Models.StrategyMoney;
 
 import Models.Markets.EMoney;
 
+
 public class GoldMoneyExch implements IExchangeMoney {
     @Override
     public double convertToTRY(double currencyQuantity) {

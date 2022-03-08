@@ -1,46 +1,31 @@
-package Models;
+package Models.Customer;
 
 import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
 import Models.Markets.*;
-
-import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.text.DecimalFormat;
 
 public class Customer {
-    private Map<String, String> stringProperties = new HashMap<>();
-    private Map<EMoney,Double> balance = new HashMap<>();
-    private Map<ECoins,Double> coins = new HashMap<>();
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String emailAddress;
+    private String tcId;
+    private String phoneNumber;
+
+    private int age;
+
+    private double creditScore;
+
+    private boolean isMarried;
+    private boolean hasCriminalRecord;
+
+    private char gender;
+
+    private Map<EMoney,Double> balance;
+    private Map<ECoins,Double> coins;
     DecimalFormat formatter = new DecimalFormat("##########.###");
-
-    public Customer(String firstName, String lastName, String tcId, String address, String phoneNumber, String emailAddress, double creditScore, boolean married, double age, boolean criminalRecord) {
-        Random r = new Random();
-        stringProperties.put("firstname",firstName);
-        stringProperties.put("lastname",lastName);
-        stringProperties.put("tcId",tcId);
-        stringProperties.put("address",address);
-        stringProperties.put("phoneNumber",phoneNumber);
-        stringProperties.put("emailAddress",emailAddress);
-        stringProperties.put("creditScore",String.valueOf(creditScore));
-        stringProperties.put("age",String.valueOf(age));
-        stringProperties.put("married",String.valueOf(married));
-        stringProperties.put("criminalRecord", String.valueOf(criminalRecord));
-        balance.put(EMoney.TRY,r.nextDouble()*10000);
-        balance.put(EMoney.USD,r.nextDouble()*1000);
-        balance.put(EMoney.EUR,r.nextDouble()*1000);
-        balance.put(EMoney.CHF,r.nextDouble()*1000);
-        balance.put(EMoney.Gold,r.nextDouble()*10);
-        coins.put(ECoins.USDT,r.nextDouble()*10000);
-        coins.put(ECoins.BNB,r.nextDouble()*1000);
-        coins.put(ECoins.ETH,r.nextDouble()*1000);
-        coins.put(ECoins.ALGO,r.nextDouble()*1000);
-    }
-
-    private String getProperty(String propertyName){
-        return stringProperties.get(propertyName);
-    }
 
     private void setBalance(EMoney money, double quantity) {
         if (balance.containsKey(money))
@@ -60,7 +45,7 @@ public class Customer {
                 balance.replace(EMoney.TRY,balance.get(EMoney.TRY)-tryQuantity);
                 double currency = processBank.sellMoney(tryQuantity);
                 setBalance(money,currency);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(currency)+" "+money.toString()+" from "+processBank.getName());
+                System.out.println("+/ "+getFirstName()+" "+getLastName()+" has bought "+formatter.format(currency)+" "+money.toString()+" from "+processBank.getName());
             }
             else System.out.println("!/ There is not enough TRY on your account for buying("+money.toString()+") from the Bank");
         }
@@ -70,7 +55,7 @@ public class Customer {
         if (balance.containsKey(money)) {
             if (currencyQuantity <= balance.get(money)) {
                 balance.replace(money,balance.get(money)-currencyQuantity);
-                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(currencyQuantity)+" "+money.toString()+" to "+processBank.getName());
+                System.out.println("-/ "+getFirstName()+" "+getLastName()+" has sold "+formatter.format(currencyQuantity)+" "+money.toString()+" to "+processBank.getName());
                 double tryQ = processBank.buyMoney(currencyQuantity);
                 setBalance(EMoney.TRY,tryQ);
             }
@@ -85,7 +70,7 @@ public class Customer {
                 coins.replace(ECoins.USDT,coins.get(ECoins.USDT)-usdtQuantity);
                 double currency = processSystem.sellCoin(usdtQuantity);
                 setCoins(coin,currency);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(currency)+" "+coin.toString()+" from "+processSystem.getName());
+                System.out.println("+/ "+getFirstName()+" "+getLastName()+" has bought "+formatter.format(currency)+" "+coin.toString()+" from "+processSystem.getName());
             }
             else System.out.println("!/ There is not enough USDT on your account for buying("+coin.toString()+") from the CoinSystem");
         }
@@ -96,7 +81,7 @@ public class Customer {
         if (coins.containsKey(coin)) {
             if (coinQuantity <= coins.get(coin)) {
                 coins.replace(coin,coins.get(coin)-coinQuantity);
-                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(coinQuantity)+" "+coin.toString()+" to "+processSystem.getName());
+                System.out.println("-/ "+getFirstName()+" "+getLastName()+" has sold "+formatter.format(coinQuantity)+" "+coin.toString()+" to "+processSystem.getName());
                 double usdt = processSystem.buyCoin(coinQuantity);
                 setCoins(ECoins.USDT,usdt);
             }
@@ -111,7 +96,7 @@ public class Customer {
                 balance.replace(EMoney.TRY, balance.get(EMoney.TRY) - tryQuantity);
                 double usdt = processSystem.tryConvertToUsdt(tryQuantity);
                 setCoins(ECoins.USDT, usdt);
-                System.out.println("+/ "+getProperty("firstname")+" "+getProperty("lastname")+" has bought "+formatter.format(usdt)+" USDT from "+processSystem.getName());
+                System.out.println("+/ "+getFirstName()+" "+getLastName()+" has bought "+formatter.format(usdt)+" USDT from "+processSystem.getName());
             }
             else System.out.println("!/ There is not enough TRY on your account for buying(USDT) from the CoinSystem");
         }
@@ -122,7 +107,7 @@ public class Customer {
         if (coins.containsKey(ECoins.USDT)) {
             if (usdtQuantity <= coins.get(ECoins.USDT)) {
                 coins.replace(ECoins.USDT, coins.get(ECoins.USDT) - usdtQuantity);
-                System.out.println("-/ "+getProperty("firstname")+" "+getProperty("lastname")+" has sold "+formatter.format(usdtQuantity)+" USDT to "+processSystem.getName());
+                System.out.println("-/ "+getFirstName()+" "+getLastName()+" has sold "+formatter.format(usdtQuantity)+" USDT to "+processSystem.getName());
                 double tryQ = processSystem.usdtConvertToTry(usdtQuantity);
                 setBalance(EMoney.TRY,tryQ);
             }
@@ -131,15 +116,129 @@ public class Customer {
 
     public void printGoodsAndChattelsOfCustomer(){
         for(Map.Entry<EMoney, Double> m : balance.entrySet())
-            System.out.println("| "+getProperty("firstname")+" "+getProperty("lastname")+" has "+formatter.format(m.getValue())+" pieces of "+m.getKey().toString());
+            System.out.println("| "+getFirstName()+" "+getLastName()+" has "+formatter.format(m.getValue())+" pieces of "+m.getKey().toString());
 
         for(Map.Entry<ECoins, Double> m : coins.entrySet())
-            System.out.println("| "+getProperty("firstname")+" "+getProperty("lastname")+" has "+formatter.format(m.getValue())+" pieces of "+m.getKey().toString());
+            System.out.println("| "+getFirstName()+" "+getLastName()+" has "+formatter.format(m.getValue())+" pieces of "+m.getKey().toString());
     }
 
- /*   public void setDebt(EMoney money, double quantity) {
+/*    public void setDebt(EMoney money, double quantity) {
         if (debt.containsKey(money))
             debt.replace(money, debt.get(money)-quantity);
         else debt.put(money,-quantity);
     }*/
+
+
+
+
+
+    /**
+     *
+     * GETTERS & SETTERS
+     *
+     */
+
+    protected String getFirstName() {
+        return firstName;
+    }
+
+    protected void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    protected String getLastName() {
+        return lastName;
+    }
+
+    protected void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    protected String getAddress() {
+        return address;
+    }
+
+    protected void setAddress(String address) {
+        this.address = address;
+    }
+
+    protected String getEmailAddress() {
+        return emailAddress;
+    }
+
+    protected void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    protected String getTcId() {
+        return tcId;
+    }
+
+    protected void setTcId(String tcId) {
+        this.tcId = tcId;
+    }
+
+    protected int getAge() {
+        return age;
+    }
+
+    protected void setAge(int age) {
+        this.age = age;
+    }
+
+    protected String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    protected void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    protected double getCreditScore() {
+        return creditScore;
+    }
+
+    protected void setCreditScore(double creditScore) {
+        this.creditScore = creditScore;
+    }
+
+    protected boolean isMarried() {
+        return isMarried;
+    }
+
+    protected void setIsMarried(boolean isMarried) {
+        this.isMarried = isMarried;
+    }
+
+    protected boolean hasCriminalRecord() {
+        return hasCriminalRecord;
+    }
+
+    protected void setHasCriminalRecord(boolean hasCriminalRecord) {
+        this.hasCriminalRecord = hasCriminalRecord;
+    }
+
+    protected char getGender() {
+        return gender;
+    }
+
+    protected void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    protected Map<EMoney, Double> getBalance() {
+        return balance;
+    }
+
+    protected void setBalance(Map<EMoney, Double> balance) {
+        this.balance = balance;
+    }
+
+    protected Map<ECoins, Double> getCoins() {
+        return coins;
+    }
+
+    protected void setCoins(Map<ECoins, Double> coins) {
+        this.coins = coins;
+    }
 }

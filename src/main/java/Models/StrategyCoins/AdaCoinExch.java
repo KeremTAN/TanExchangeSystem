@@ -2,6 +2,7 @@ package Models.StrategyCoins;
 
 import Models.Markets.ECoins;
 
+
 public class AdaCoinExch implements IExchangeCoins {
     @Override
     public double convertToUSDT(double coinQuantity) {
