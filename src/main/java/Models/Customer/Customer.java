@@ -128,117 +128,113 @@ public class Customer {
         else debt.put(money,-quantity);
     }*/
 
-
-
-
-
     /**
      *
      * GETTERS & SETTERS
      *
      */
 
-    protected String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    protected void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    protected String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    protected void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    protected String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    protected void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    protected String getEmailAddress() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    protected void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    protected String getTcId() {
+    public String getTcId() {
         return tcId;
     }
 
-    protected void setTcId(String tcId) {
+    public void setTcId(String tcId) {
         this.tcId = tcId;
     }
 
-    protected int getAge() {
+    public int getAge() {
         return age;
     }
 
-    protected void setAge(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    protected String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    protected void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    protected double getCreditScore() {
+    public double getCreditScore() {
         return creditScore;
     }
 
-    protected void setCreditScore(double creditScore) {
+    public void setCreditScore(double creditScore) {
         this.creditScore = creditScore;
     }
 
-    protected boolean isMarried() {
+    public boolean isMarried() {
         return isMarried;
     }
 
-    protected void setIsMarried(boolean isMarried) {
+    public void setIsMarried(boolean isMarried) {
         this.isMarried = isMarried;
     }
 
-    protected boolean hasCriminalRecord() {
+    public boolean hasCriminalRecord() {
         return hasCriminalRecord;
     }
 
-    protected void setHasCriminalRecord(boolean hasCriminalRecord) {
+    public void setHasCriminalRecord(boolean hasCriminalRecord) {
         this.hasCriminalRecord = hasCriminalRecord;
     }
 
-    protected char getGender() {
+    public char getGender() {
         return gender;
     }
 
-    protected void setGender(char gender) {
+    public void setGender(char gender) {
         this.gender = gender;
     }
 
-    protected Map<EMoney, Double> getBalance() {
+    public Map<EMoney, Double> getBalance() {
         return balance;
     }
 
-    protected void setBalance(Map<EMoney, Double> balance) {
+    public void setBalance(Map<EMoney, Double> balance) {
         this.balance = balance;
     }
 
-    protected Map<ECoins, Double> getCoins() {
+    public Map<ECoins, Double> getCoins() {
         return coins;
     }
 
-    protected void setCoins(Map<ECoins, Double> coins) {
+    public void setCoins(Map<ECoins, Double> coins) {
         this.coins = coins;
     }
 }

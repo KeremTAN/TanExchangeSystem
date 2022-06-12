@@ -5,7 +5,9 @@ import Models.StrategyMoney.*;
 
 import java.util.Random;
 
+@Deprecated
 public class MoneyFactory {
+    // Simple Factory Method
     public EMoney setMoney(ABanks processBank){
         Random r = new Random();
         int choose;

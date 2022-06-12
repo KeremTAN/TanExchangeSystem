@@ -4,6 +4,7 @@ import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
 import Models.Customer.Customer;
 import Models.Factory.*;
+import Models.Factory.AMoneyFactory.IMoneyFactory;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
 import java.util.Random;
@@ -47,16 +48,19 @@ public class Facade {
 
     /** BANK SYSTEMS **/
 
-    public void customerBuysCurrency(Customer customer, double tryQuantity){
+    /**
+     * getMoney() method of IMoneyFactory returns EMoney type
+     * **/
+    public void customerBuysCurrency(Customer customer, double tryQuantity, IMoneyFactory moneyFactory){
         processBank = new BankFactory().setBank();
-        EMoney m = new MoneyFactory().setMoney(processBank);
-        customer.buyMoneyFromBank(m, tryQuantity, processBank);
+        processBank.setBuySellMoney(moneyFactory.getMoney());
+        customer.buyMoneyFromBank(moneyFactory.getMoneyType(), tryQuantity, processBank);
     }
 
-    public void customerSellsCurrency(Customer customer, double currencyQuantity){
+    public void customerSellsCurrency(Customer customer, double currencyQuantity, IMoneyFactory moneyFactory){
         processBank = new BankFactory().setBank();
-        EMoney m = new MoneyFactory().setMoney(processBank);
-        customer.sellMoneyToBank(m, currencyQuantity, processBank);
+        processBank.setBuySellMoney(moneyFactory.getMoney());
+        customer.sellMoneyToBank(moneyFactory.getMoneyType(), currencyQuantity, processBank);
 
     }
 
