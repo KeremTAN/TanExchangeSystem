@@ -3,7 +3,7 @@ package Models.StrategyMoney;
 import Models.Markets.EMoney;
 
 
-public class UsdMoneyExch implements IExchangeMoney {
+class UsdMoneyExch implements IExchangeMoney {
     @Override
     public double convertToTRY(double currencyQuantity) {
         return currencyQuantity*EMoney.getUSD();

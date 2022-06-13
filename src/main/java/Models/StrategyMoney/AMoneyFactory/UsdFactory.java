@@ -1,16 +1,17 @@
-package Models.Factory.AMoneyFactory;
+package Models.StrategyMoney.AMoneyFactory;
 
 import Models.Markets.EMoney;
 import Models.StrategyMoney.*;
 
-public class EurFactory implements IMoneyFactory{
+public class UsdFactory implements IMoneyFactory{
+    
     @Override
     public IExchangeMoney createMoney() {
-        return new EurMoneyExch();
+        return new UsdMoneyExch();
     }
 
     @Override
     public EMoney getMoneyType() {
-        return EMoney.EUR;
+        return EMoney.USD;
     }
 }

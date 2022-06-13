@@ -1,4 +1,4 @@
-package Models.Factory.AMoneyFactory;
+package Models.StrategyMoney.AMoneyFactory;
 
 import Models.Markets.EMoney;
 import Models.StrategyMoney.ChfMoneyExch;
