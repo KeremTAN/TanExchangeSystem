@@ -3,7 +3,9 @@ import Models.Banks.*;
 
 import java.util.Random;
 
+@Deprecated
 public class BankFactory {
+    // Simple Factory Method
     public ABanks setBank(){
         Random r = new Random();
         int choose;

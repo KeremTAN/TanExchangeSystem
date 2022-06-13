@@ -6,7 +6,7 @@ import Models.StrategyMoney.SilverMoneyExch;
 
 public class SilverFactory implements IMoneyFactory{
     @Override
-    public IExchangeMoney getMoney() {
+    public IExchangeMoney createMoney() {
         return new SilverMoneyExch();
     }
 

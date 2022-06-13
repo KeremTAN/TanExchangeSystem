@@ -6,7 +6,7 @@ import Models.StrategyMoney.*;
 public class UsdFactory implements IMoneyFactory{
     
     @Override
-    public IExchangeMoney getMoney() {
+    public IExchangeMoney createMoney() {
         return new UsdMoneyExch();
     }
 

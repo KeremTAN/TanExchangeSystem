@@ -3,6 +3,7 @@ package View;
 import Controls.Facade;
 import Models.Customer.Customer;
 import Models.Customer.CustomerBuilder;
+import Models.Factory.ABankFactory.TCIsBankFactory;
 import Models.Factory.AMoneyFactory.EurFactory;
 
 public class App {
@@ -21,7 +22,7 @@ public class App {
         Customer[] allCustomers={ cus1, cus2};
 
         cus1.printGoodsAndChattelsOfCustomer();
-        facade.customerSellsCurrency(cus1, 100, new EurFactory());
+        facade.customerSellsCurrency(cus1, new TCIsBankFactory(),100, new EurFactory());
         cus1.printGoodsAndChattelsOfCustomer();
 
     }

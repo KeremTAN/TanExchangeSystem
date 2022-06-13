@@ -4,23 +4,15 @@ import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
 import Models.Customer.Customer;
 import Models.Factory.*;
+import Models.Factory.ABankFactory.IBankFactory;
 import Models.Factory.AMoneyFactory.IMoneyFactory;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
-import java.util.Random;
 
 public class Facade {
     private static Facade instance;
     private ABanks processBank;
     private ACoinSystem processCoinSystem;
-    private Random r = new Random();
-
-/*
-//    private ABanks yapiKrediBank = YapiKrediBank.getInstance();
-//    private ABanks tcIsBank = TurkiyeCumIsBank.getInstance();
-//    private ACoinSystem binance = Binance.getInstance();
-//    private ACoinSystem kuCoin = KuCoin.getInstance();
-*/
 
     private Facade(){ }
 
@@ -51,17 +43,16 @@ public class Facade {
     /**
      * getMoney() method of IMoneyFactory returns EMoney type
      * **/
-    public void customerBuysCurrency(Customer customer, double tryQuantity, IMoneyFactory moneyFactory){
-        processBank = new BankFactory().setBank();
-        processBank.setBuySellMoney(moneyFactory.getMoney());
+    public void customerBuysCurrency(Customer customer, IBankFactory bankFactory, double tryQuantity, IMoneyFactory moneyFactory){
+        processBank = bankFactory.createBank();
+        processBank.setBuySellMoney(moneyFactory.createMoney());
         customer.buyMoneyFromBank(moneyFactory.getMoneyType(), tryQuantity, processBank);
     }
 
-    public void customerSellsCurrency(Customer customer, double currencyQuantity, IMoneyFactory moneyFactory){
-        processBank = new BankFactory().setBank();
-        processBank.setBuySellMoney(moneyFactory.getMoney());
+    public void customerSellsCurrency(Customer customer, IBankFactory bankFactory, double currencyQuantity, IMoneyFactory moneyFactory){
+        processBank = bankFactory.createBank();
+        processBank.setBuySellMoney(moneyFactory.createMoney());
         customer.sellMoneyToBank(moneyFactory.getMoneyType(), currencyQuantity, processBank);
-
     }
 
     /** COIN SYSTEMS **/
@@ -88,7 +79,6 @@ public class Facade {
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
         ECoins c = new CoinFactory().setCoin(processCoinSystem);
         customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
-
     }
 
 } // FACADE

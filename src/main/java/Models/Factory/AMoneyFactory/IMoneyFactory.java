@@ -4,6 +4,6 @@ import Models.Markets.EMoney;
 import Models.StrategyMoney.IExchangeMoney;
 
 public interface IMoneyFactory {
-    IExchangeMoney getMoney();
+    IExchangeMoney createMoney();
     EMoney getMoneyType();
 }
