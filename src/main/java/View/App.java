@@ -3,9 +3,8 @@ package View;
 import Controls.Facade;
 import Models.Customer.Customer;
 import Models.Customer.CustomerBuilder;
-import Models.Factory.ABankFactory.TCIsBankFactory;
 import Models.Factory.ACoinFactory.AlgoFactory;
-import Models.Factory.AMoneyFactory.EurFactory;
+import Models.Factory.ACoinSystemFactory.BinanceFactory;
 
 public class App {
     public static void main(String[] args) {
@@ -23,8 +22,7 @@ public class App {
         Customer[] allCustomers={ cus1, cus2};
 
         cus2.printGoodsAndChattelsOfCustomer();
-        facade.customerBuysCoin(cus2, 150, new AlgoFactory());
+        facade.customerBuysCoin(cus2, new BinanceFactory(),150, new AlgoFactory());
         cus2.printGoodsAndChattelsOfCustomer();
-
     }
 }

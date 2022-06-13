@@ -6,6 +6,7 @@ import Models.Customer.Customer;
 import Models.Factory.*;
 import Models.Factory.ABankFactory.IBankFactory;
 import Models.Factory.ACoinFactory.ICoinFactory;
+import Models.Factory.ACoinSystemFactory.ICoinSystemFactory;
 import Models.Factory.AMoneyFactory.IMoneyFactory;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
@@ -58,26 +59,26 @@ public class Facade {
 
     /** COIN SYSTEMS **/
 
-    public void customerBuysUsdt(Customer customer, double tryQuantity){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+    public void customerBuysUsdt(Customer customer, ICoinSystemFactory coinSystemFactory, double tryQuantity){
+        processCoinSystem = coinSystemFactory.createCoinSystem();
         processCoinSystem.setBuySellCoins(new UsdtCoinEXch());
         customer.buyUsdt(tryQuantity, processCoinSystem);
     }
 
-    public void customerSellsUsdt(Customer customer, double usdtQuantity){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+    public void customerSellsUsdt(Customer customer, ICoinSystemFactory coinSystemFactory, double usdtQuantity){
+        processCoinSystem = coinSystemFactory.createCoinSystem();
         processCoinSystem.setBuySellCoins(new UsdtCoinEXch());
         customer.sellUsdt(usdtQuantity, processCoinSystem);
     }
 
-    public void customerBuysCoin(Customer customer, double usdtQuantity, ICoinFactory coinFactory){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+    public void customerBuysCoin(Customer customer, ICoinSystemFactory coinSystemFactory, double usdtQuantity, ICoinFactory coinFactory){
+        processCoinSystem = coinSystemFactory.createCoinSystem();
         processCoinSystem.setBuySellCoins(coinFactory.createCoin());
         customer.buyCoinFromSystem(coinFactory.getCoinType(), usdtQuantity, processCoinSystem);
     }
 
-    public void customerSellsCoin(Customer customer, double coinQuantity, ICoinFactory coinFactory){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+    public void customerSellsCoin(Customer customer, ICoinSystemFactory coinSystemFactory, double coinQuantity, ICoinFactory coinFactory){
+        processCoinSystem = coinSystemFactory.createCoinSystem();
         processCoinSystem.setBuySellCoins(coinFactory.createCoin());
         customer.sellCoinToSystem(coinFactory.getCoinType(), coinQuantity, processCoinSystem);
     }
