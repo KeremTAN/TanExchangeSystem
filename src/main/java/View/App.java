@@ -4,6 +4,7 @@ import Controls.Facade;
 import Models.Customer.Customer;
 import Models.Customer.CustomerBuilder;
 import Models.Factory.ABankFactory.TCIsBankFactory;
+import Models.Factory.ACoinFactory.AlgoFactory;
 import Models.Factory.AMoneyFactory.EurFactory;
 
 public class App {
@@ -21,9 +22,9 @@ public class App {
                 .buildCustomer();
         Customer[] allCustomers={ cus1, cus2};
 
-        cus1.printGoodsAndChattelsOfCustomer();
-        facade.customerSellsCurrency(cus1, new TCIsBankFactory(),100, new EurFactory());
-        cus1.printGoodsAndChattelsOfCustomer();
+        cus2.printGoodsAndChattelsOfCustomer();
+        facade.customerBuysCoin(cus2, 150, new AlgoFactory());
+        cus2.printGoodsAndChattelsOfCustomer();
 
     }
 }

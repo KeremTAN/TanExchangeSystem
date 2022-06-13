@@ -5,6 +5,7 @@ import Models.CoinSystems.ACoinSystem;
 import Models.Customer.Customer;
 import Models.Factory.*;
 import Models.Factory.ABankFactory.IBankFactory;
+import Models.Factory.ACoinFactory.ICoinFactory;
 import Models.Factory.AMoneyFactory.IMoneyFactory;
 import Models.Markets.*;
 import Models.StrategyCoins.UsdtCoinEXch;
@@ -69,16 +70,16 @@ public class Facade {
         customer.sellUsdt(usdtQuantity, processCoinSystem);
     }
 
-    public void customerBuysCoin(Customer customer, double usdtQuantity){
+    public void customerBuysCoin(Customer customer, double usdtQuantity, ICoinFactory coinFactory){
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
-        ECoins c = new CoinFactory().setCoin(processCoinSystem);
-        customer.buyCoinFromSystem(c, usdtQuantity, processCoinSystem);
+        processCoinSystem.setBuySellCoins(coinFactory.createCoin());
+        customer.buyCoinFromSystem(coinFactory.getCoinType(), usdtQuantity, processCoinSystem);
     }
 
-    public void customerSellsCoin(Customer customer, double coinQuantity){
+    public void customerSellsCoin(Customer customer, double coinQuantity, ICoinFactory coinFactory){
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
-        ECoins c = new CoinFactory().setCoin(processCoinSystem);
-        customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
+        processCoinSystem.setBuySellCoins(coinFactory.createCoin());
+        customer.sellCoinToSystem(coinFactory.getCoinType(), coinQuantity, processCoinSystem);
     }
 
 } // FACADE
