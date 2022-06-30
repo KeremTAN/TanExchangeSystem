@@ -3,7 +3,7 @@ package Models.StrategyMoney;
 import Models.Markets.EMoney;
 
 
-class GbpMoneyExch implements IExchangeMoney {
+public class GbpMoneyExch implements IExchangeMoney {
     @Override
     public double convertToTRY(double currencyQuantity) {
         return currencyQuantity* EMoney.getGBP();
