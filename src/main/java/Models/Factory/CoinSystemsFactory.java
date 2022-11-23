@@ -3,9 +3,7 @@ import Models.CoinSystems.*;
 
 import java.util.Random;
 
-@Deprecated
 public class CoinSystemsFactory {
-    // Simple Factory Method
     public ACoinSystem setCoinSystem(){
         Random r = new Random();
         int choose;

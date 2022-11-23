@@ -6,9 +6,7 @@ import Models.StrategyCoins.*;
 
 import java.util.Random;
 
-@Deprecated
 public class CoinFactory {
-    // Simple Factory Method
     public ECoins setCoin(ACoinSystem processCoinSystem){
         Random r = new Random();
         int choose;

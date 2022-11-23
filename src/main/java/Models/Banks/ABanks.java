@@ -53,7 +53,7 @@ public abstract class ABanks  {
         calculateGainOfBank((realValue*getBankCommission())*buySellMoney.getMoneyValue()); // bank of currency converts to TRY for adding its safe
         getAllReserveMoney().replace(buySellMoney.getMoneyType(), getAllReserveMoney().get(buySellMoney.getMoneyType())-retMoney);
         getAllReserveMoney().replace(EMoney.TRY, getAllReserveMoney().get(EMoney.TRY)+tryQuantity);
-        return retMoney; // sell currency
+        return retMoney; //currency
     }
 
     public void setBuySellMoney(IExchangeMoney buySellMoney) {
