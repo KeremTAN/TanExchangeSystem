@@ -73,7 +73,7 @@ public class CustomerBuilder {
         customer.setAge(age);
         customer.setPhoneNumber(phoneNumber);
         customer.setCreditScore(creditScore);
-        customer.setIsMarried(isMarried);
+        customer.setMarried(isMarried);
         customer.setHasCriminalRecord(hasCriminalRecord);
         customer.setGender(gender);
         customer.setBalance(balance);
