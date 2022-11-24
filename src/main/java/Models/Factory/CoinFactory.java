@@ -1,13 +1,11 @@
 package Models.Factory;
 
-import Models.CoinSystems.ACoinSystem;
 import Models.Markets.ECoins;
-import Models.StrategyCoins.*;
 
 import java.util.Random;
 
 public class CoinFactory {
-    public ECoins setCoin(ACoinSystem processCoinSystem){
+    public ECoins setCoin(){
         Random r = new Random();
         int choose;
         System.out.println("""
@@ -27,11 +25,11 @@ public class CoinFactory {
             System.out.print("You can make to choose for your process coin : ");
             System.out.println(choose);
             //processTimeStar();
-            if (choose==1) { processCoinSystem.setBuySellCoins(new BtcCoinExch()); return ECoins.BTC; }
-            else if (choose==2) { processCoinSystem.setBuySellCoins(new EthCoinExch()); return ECoins.ETH; }
-            else if (choose==3) { processCoinSystem.setBuySellCoins(new BnbCoinExch()); return ECoins.BNB; }
-            else if (choose==4) { processCoinSystem.setBuySellCoins(new AlgoCoinExch()); return ECoins.ALGO; }
-            else if (choose==5) { processCoinSystem.setBuySellCoins(new AdaCoinExch()); return ECoins.ADA; }
+            if (choose==1) { return ECoins.BTC; }
+            else if (choose==2) { return ECoins.ETH; }
+            else if (choose==3) { return ECoins.BNB; }
+            else if (choose==4) { return ECoins.ALGO; }
+            else if (choose==5) { return ECoins.ADA; }
         }
     }
 }

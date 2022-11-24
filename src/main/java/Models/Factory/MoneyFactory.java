@@ -1,12 +1,10 @@
 package Models.Factory;
-import Models.Banks.ABanks;
 import Models.Markets.EMoney;
-import Models.StrategyMoney.*;
 
 import java.util.Random;
 
 public class MoneyFactory {
-    public EMoney setMoney(ABanks processBank){
+    public EMoney setMoney(){
         Random r = new Random();
         int choose;
         System.out.println("""
@@ -27,12 +25,12 @@ public class MoneyFactory {
             System.out.print("You can make to choose for your process money : ");
             System.out.println(choose);
             //processTimeDash();
-            if (choose==1) { processBank.setBuySellMoney(new UsdMoneyExch()); return EMoney.USD; }
-            else if (choose==2) { processBank.setBuySellMoney(new EurMoneyExch()); return EMoney.EUR; }
-            else if (choose==3) { processBank.setBuySellMoney(new GbpMoneyExch()); return EMoney.GBP; }
-            else if (choose==4) { processBank.setBuySellMoney(new ChfMoneyExch()); return EMoney.CHF; }
-            else if (choose==5) { processBank.setBuySellMoney(new GoldMoneyExch()); return EMoney.Gold; }
-            else if (choose==6) { processBank.setBuySellMoney(new SilverMoneyExch()); return EMoney.Silver; }
+            if (choose==1) {  return EMoney.USD; }
+            else if (choose==2) { return EMoney.EUR; }
+            else if (choose==3) {  return EMoney.GBP; }
+            else if (choose==4) {  return EMoney.CHF; }
+            else if (choose==5) {  return EMoney.Gold; }
+            else if (choose==6) {  return EMoney.Silver; }
         }
     }
 }

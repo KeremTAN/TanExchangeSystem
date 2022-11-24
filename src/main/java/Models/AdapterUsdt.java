@@ -1,3 +1,4 @@
+/*
 package Models;
 
 import Models.Markets.ECoins;
@@ -5,6 +6,7 @@ import Models.Markets.EMoney;
 import Models.StrategyCoins.UsdtCoinEXch;
 import Models.StrategyMoney.IExchangeMoney;
 
+@Deprecated
 public class AdapterUsdt implements IExchangeMoney {
     private UsdtCoinEXch adapteeUsdt;
 
@@ -32,3 +34,4 @@ public class AdapterUsdt implements IExchangeMoney {
         return null;
     }
 }
+*/

@@ -1,7 +1,7 @@
 package Models.Markets;
 
 public enum ECoins {
-    USDT(13.55), BTC(38500.865), BNB(450.48), ETH(15980.125), ALGO(1.05), ADA(0.8);
+    USDT(1.05), BTC(16500.865), BNB(250.48), ETH(1580.125), ALGO(0.55), ADA(0.2);
 
     private double price;
 
@@ -9,24 +9,6 @@ public enum ECoins {
         this.price=price;
     }
 
-    public static double getUSDT() { return USDT.price; }
-
-    public static double getBTC() {
-        return BTC.price;
-    }
-
-    public static double getBNB() {
-        return BNB.price;
-    }
-
-    public static double getETH() { return ETH.price; }
-
-    public static double getALGO() {
-        return ALGO.price;
-    }
-
-    public static double getADA() {
-        return ADA.price;
-    }
+    public double getPrice() { return this.price; }
 }
 

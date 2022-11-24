@@ -1,7 +1,8 @@
 package Models.Banks;
 
 import Models.Markets.EMoney;
-import Models.StrategyMoney.IExchangeMoney;
+import Models.StrategyConvert.MoneyConverter.IConvertMoney;
+
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public abstract class ABanks  {
     private double tempCommission=0;
     public abstract String getName();
     protected abstract Map<EMoney, Double> getAllReserveMoney();
-    private IExchangeMoney buySellMoney;
+    private IConvertMoney moneyTrade;
     protected abstract double getBankCommission();
     protected abstract double getMoneyBank();
     protected abstract void updateBankMoney();
@@ -36,28 +37,30 @@ public abstract class ABanks  {
         return tempCommission;
     }
 
-    public double buyMoney(double currency) {
-        double realValue=buySellMoney.convertToTRY(currency);
+    public double buyMoney(EMoney money, double currency) {
+        double realValue=moneyTrade.convert(money.getPrice(), currency);
         double retMoney=realValue-(realValue * getBankCommission());
         System.out.println("!/ "+formatter.format(realValue*getBankCommission())+" TRY has been cut for this selling process");
         calculateGainOfBank((realValue*getBankCommission()));
-        getAllReserveMoney().replace(buySellMoney.getMoneyType(), getAllReserveMoney().get(buySellMoney.getMoneyType())+currency);
+        getAllReserveMoney().replace(money, getAllReserveMoney().get(money)+currency);
         getAllReserveMoney().replace(EMoney.TRY, getAllReserveMoney().get(EMoney.TRY)-retMoney);
         return retMoney; // payment try
     }
 
-    public double sellMoney(double tryQuantity) {
-        double realValue=buySellMoney.convertToCurrency(tryQuantity);
+    public double sellMoney(EMoney money, double tryQuantity) {
+        double realValue=moneyTrade.convert(money.getPrice(), tryQuantity);
         double retMoney=realValue-(realValue*getBankCommission());
-        System.out.println("!/ "+formatter.format((realValue*getBankCommission())*(buySellMoney.getMoneyValue()))+" TRY has been cut for this buying process");
-        calculateGainOfBank((realValue*getBankCommission())*buySellMoney.getMoneyValue()); // bank of currency converts to TRY for adding its safe
-        getAllReserveMoney().replace(buySellMoney.getMoneyType(), getAllReserveMoney().get(buySellMoney.getMoneyType())-retMoney);
+        System.out.println("!/ "+formatter.format((realValue*getBankCommission())*(money.getPrice()))+" TRY has been cut for this buying process");
+        calculateGainOfBank((realValue*getBankCommission())*money.getPrice()); // bank of currency converts to TRY for adding its safe
+        getAllReserveMoney().replace(money, getAllReserveMoney().get(money)-retMoney);
         getAllReserveMoney().replace(EMoney.TRY, getAllReserveMoney().get(EMoney.TRY)+tryQuantity);
         return retMoney; //currency
     }
 
-    public void setBuySellMoney(IExchangeMoney buySellMoney) {
-        this.buySellMoney=buySellMoney;
+
+
+    public void setMoneyTrade(IConvertMoney buySellMoney) {
+        this.moneyTrade=buySellMoney;
     }
 
     public double giveCredit(double quantity) {

@@ -5,7 +5,11 @@ import Models.CoinSystems.ACoinSystem;
 import Models.Customer.Customer;
 import Models.Factory.*;
 import Models.Markets.*;
-import Models.StrategyCoins.UsdtCoinEXch;
+import Models.StrategyConvert.CoinConverter.ConvertToCoin;
+import Models.StrategyConvert.CoinConverter.ConvertToUsdt;
+import Models.StrategyConvert.MoneyConverter.ConvertToCurrency;
+import Models.StrategyConvert.MoneyConverter.ConvertToTRY;
+
 import java.util.Random;
 
 public class Facade {
@@ -49,13 +53,15 @@ public class Facade {
 
     public void customerBuysCurrency(Customer customer, double tryQuantity){
         processBank = new BankFactory().setBank();
-        EMoney m = new MoneyFactory().setMoney(processBank);
+        processBank.setMoneyTrade(new ConvertToCurrency());
+        EMoney m = new MoneyFactory().setMoney();
         customer.buyMoneyFromBank(m, tryQuantity, processBank);
     }
 
     public void customerSellsCurrency(Customer customer, double currencyQuantity){
         processBank = new BankFactory().setBank();
-        EMoney m = new MoneyFactory().setMoney(processBank);
+        processBank.setMoneyTrade(new ConvertToTRY());
+        EMoney m = new MoneyFactory().setMoney();
         customer.sellMoneyToBank(m, currencyQuantity, processBank);
 
     }
@@ -63,26 +69,28 @@ public class Facade {
     /** COIN SYSTEMS **/
 
     public void customerBuysUsdt(Customer customer, double tryQuantity){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+      /*  processCoinSystem = new CoinSystemsFactory().setCoinSystem();
         processCoinSystem.setBuySellCoins(new UsdtCoinEXch());
-        customer.buyUsdt(tryQuantity, processCoinSystem);
+        customer.buyUsdt(tryQuantity, processCoinSystem);*/
     }
 
     public void customerSellsUsdt(Customer customer, double usdtQuantity){
-        processCoinSystem = new CoinSystemsFactory().setCoinSystem();
+       /* processCoinSystem = new CoinSystemsFactory().setCoinSystem();
         processCoinSystem.setBuySellCoins(new UsdtCoinEXch());
-        customer.sellUsdt(usdtQuantity, processCoinSystem);
+        customer.sellUsdt(usdtQuantity, processCoinSystem);*/
     }
 
     public void customerBuysCoin(Customer customer, double usdtQuantity){
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
-        ECoins c = new CoinFactory().setCoin(processCoinSystem);
+        processCoinSystem.setCoinTrade(new ConvertToCoin());
+        ECoins c = new CoinFactory().setCoin();
         customer.buyCoinFromSystem(c, usdtQuantity, processCoinSystem);
     }
 
     public void customerSellsCoin(Customer customer, double coinQuantity){
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
-        ECoins c = new CoinFactory().setCoin(processCoinSystem);
+        processCoinSystem.setCoinTrade(new ConvertToUsdt());
+        ECoins c = new CoinFactory().setCoin();
         customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
 
     }

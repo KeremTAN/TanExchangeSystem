@@ -43,12 +43,11 @@ public class Customer {
             coins.replace(coin, coins.get(coin)+quantity);
         else coins.put(coin, quantity);
     }
-
     public void buyMoneyFromBank(EMoney money, double tryQuantity, ABanks processBank) {
         if (balance.containsKey(EMoney.TRY)) {
             if (tryQuantity <= balance.get(EMoney.TRY)) {
                 balance.replace(EMoney.TRY,balance.get(EMoney.TRY)-tryQuantity);
-                double currency = processBank.sellMoney(tryQuantity);
+                double currency = processBank.sellMoney(money, tryQuantity);
                 setBalance(money,currency);
                 System.out.println("+/ "+getFirstName()+" "+getLastName()+" has bought "+formatter.format(currency)+" "+money.toString()+" from "+processBank.getName());
             }
@@ -61,7 +60,7 @@ public class Customer {
             if (currencyQuantity <= balance.get(money)) {
                 balance.replace(money,balance.get(money)-currencyQuantity);
                 System.out.println("-/ "+getFirstName()+" "+getLastName()+" has sold "+formatter.format(currencyQuantity)+" "+money.toString()+" to "+processBank.getName());
-                double tryQ = processBank.buyMoney(currencyQuantity);
+                double tryQ = processBank.buyMoney(money, currencyQuantity);
                 setBalance(EMoney.TRY,tryQ);
             }
             else System.out.println("!/ There is not enough money("+money.toString()+") on your account for selling to the Bank");
@@ -73,7 +72,7 @@ public class Customer {
         if (coins.containsKey(ECoins.USDT)) {
             if (usdtQuantity <= coins.get(ECoins.USDT)) {
                 coins.replace(ECoins.USDT,coins.get(ECoins.USDT)-usdtQuantity);
-                double currency = processSystem.sellCoin(usdtQuantity);
+                double currency = processSystem.sellCoin(coin, usdtQuantity);
                 setCoins(coin,currency);
                 System.out.println("+/ "+getFirstName()+" "+getLastName()+" has bought "+formatter.format(currency)+" "+coin.toString()+" from "+processSystem.getName());
             }
@@ -87,14 +86,14 @@ public class Customer {
             if (coinQuantity <= coins.get(coin)) {
                 coins.replace(coin,coins.get(coin)-coinQuantity);
                 System.out.println("-/ "+getFirstName()+" "+getLastName()+" has sold "+formatter.format(coinQuantity)+" "+coin.toString()+" to "+processSystem.getName());
-                double usdt = processSystem.buyCoin(coinQuantity);
+                double usdt = processSystem.buyCoin(coin, coinQuantity);
                 setCoins(ECoins.USDT,usdt);
             }
             else System.out.println("!/ There is not enough money("+coin.toString()+") on your account for selling to the CoinSystem");
         }
         else System.out.println("!/ You do not have money("+coin.toString()+") for selling");
     }
-
+/* ADAPTER
     public void buyUsdt(double tryQuantity, ACoinSystem processSystem){
         if (balance.containsKey(EMoney.TRY)) {
             if (tryQuantity <= balance.get(EMoney.TRY)) {
@@ -118,7 +117,7 @@ public class Customer {
             }
         }
     }
-
+*/
     public void printGoodsAndChattelsOfCustomer(){
         for(Map.Entry<EMoney, Double> m : balance.entrySet())
             System.out.println("| "+getFirstName()+" "+getLastName()+" has "+formatter.format(m.getValue())+" pieces of "+m.getKey().toString());

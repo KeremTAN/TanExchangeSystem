@@ -1,9 +1,7 @@
 package Models.CoinSystems;
 
-import Models.AdapterUsdt;
 import Models.Markets.ECoins;
-import Models.StrategyCoins.IExchangeCoins;
-import Models.StrategyCoins.UsdtCoinEXch;
+import Models.StrategyConvert.CoinConverter.IConverterCoin;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -13,7 +11,7 @@ public abstract class ACoinSystem {
     private double tempCommission;
     public abstract String getName();
     protected abstract Map<ECoins,Double> getAllCoinsOnMarket();
-    private IExchangeCoins buySellCoins;
+    private IConverterCoin coinTrade;
     protected abstract double getCoinSystemCommission();
     protected abstract double getMoneyOfCoinSystem(); // Usdt
     protected abstract void updateCoinSystemMoney();
@@ -39,26 +37,26 @@ public abstract class ACoinSystem {
         return tempCommission;
     }
 
-    public double buyCoin(double coinQuantity) { //ret usdt
-        double realValue=buySellCoins.convertToUSDT(coinQuantity);
+    public double buyCoin(ECoins coin, double coinQuantity) { //ret usdt
+        double realValue=coinTrade.convert(coin.getPrice(), coinQuantity);
         double retUsdt=realValue-(realValue*getCoinSystemCommission());
         System.out.println("!/ "+formatter.format(realValue*getCoinSystemCommission())+" USDT has been cut for this selling process");
         calculateGainOfCoinSystem(realValue*getCoinSystemCommission());
-        getAllCoinsOnMarket().replace(buySellCoins.getCoinType(),getAllCoinsOnMarket().get(buySellCoins.getCoinType())+coinQuantity);
+        getAllCoinsOnMarket().replace(coin,getAllCoinsOnMarket().get(coin)+coinQuantity);
         getAllCoinsOnMarket().replace(ECoins.USDT,getAllCoinsOnMarket().get(ECoins.USDT)-retUsdt);
         return  retUsdt;
     }
 
-    public double sellCoin(double usdtQuantity) { /*ret coin*/
-        double realValue=buySellCoins.convertToCoin(usdtQuantity);
+    public double sellCoin(ECoins coin, double usdtQuantity) { /*ret coin*/
+        double realValue=coinTrade.convert(coin.getPrice(), usdtQuantity);
         double retCoin=realValue-(realValue* getCoinSystemCommission());
-        calculateGainOfCoinSystem((realValue* getCoinSystemCommission())*buySellCoins.getCoinValue()); //
-        System.out.println("!/ "+formatter.format((realValue* getCoinSystemCommission())*buySellCoins.getCoinValue())+" USDT has been cut for this buying process");// coin converts to usdt for adding its safe of binance
-        getAllCoinsOnMarket().replace(buySellCoins.getCoinType(),getAllCoinsOnMarket().get(buySellCoins.getCoinType())-retCoin);
+        calculateGainOfCoinSystem((realValue* getCoinSystemCommission())*coin.getPrice()); //
+        System.out.println("!/ "+formatter.format((realValue* getCoinSystemCommission())*coin.getPrice())+" USDT has been cut for this buying process");// coin converts to usdt for adding its safe of binance
+        getAllCoinsOnMarket().replace(coin,getAllCoinsOnMarket().get(coin)-retCoin);
         getAllCoinsOnMarket().replace(ECoins.USDT,getAllCoinsOnMarket().get(ECoins.USDT)+usdtQuantity);
         return retCoin; // coin
     }
-
+/*
     public double tryConvertToUsdt(double tryQuantity){
         double usdt = new AdapterUsdt(new UsdtCoinEXch()).convertToCurrency(tryQuantity);
         calculateGainOfCoinSystem(usdt*getCoinSystemCommission());
@@ -70,8 +68,8 @@ public abstract class ACoinSystem {
         usdtQuantity-=(usdtQuantity*getCoinSystemCommission());
         return new AdapterUsdt(new UsdtCoinEXch()).convertToTRY(usdtQuantity); // ret TRY
     }
-
-    public void setBuySellCoins(IExchangeCoins buySellCoins) {
-        this.buySellCoins=buySellCoins;
+*/
+    public void setCoinTrade(IConverterCoin coinTrade) {
+        this.coinTrade=coinTrade;
     }
 }
