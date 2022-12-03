@@ -1,6 +1,7 @@
 package Models.CoinSystems;
 
 import Models.Markets.ECoins;
+import Models.Markets.EMoney;
 import Models.StrategyConvert.CoinConverter.IConverterCoin;
 
 import java.text.DecimalFormat;
@@ -56,19 +57,23 @@ public abstract class ACoinSystem {
         getAllCoinsOnMarket().replace(ECoins.USDT,getAllCoinsOnMarket().get(ECoins.USDT)+usdtQuantity);
         return retCoin; // coin
     }
-/*
+
     public double tryConvertToUsdt(double tryQuantity){
-        double usdt = new AdapterUsdt(new UsdtCoinEXch()).convertToCurrency(tryQuantity);
+        double usdt = tryQuantity/ECoins.USDT.getPrice();
         calculateGainOfCoinSystem(usdt*getCoinSystemCommission());
         return (usdt-(usdt*getCoinSystemCommission()));
     }
 
+    /**
+     * USDT convert to USD
+     * USD convert to TRY
+     * */
     public double usdtConvertToTry(double usdtQuantity){
         calculateGainOfCoinSystem(usdtQuantity*getCoinSystemCommission());
         usdtQuantity-=(usdtQuantity*getCoinSystemCommission());
-        return new AdapterUsdt(new UsdtCoinEXch()).convertToTRY(usdtQuantity); // ret TRY
+        return (usdtQuantity*ECoins.USDT.getPrice())*EMoney.USD.getPrice(); // ret TRY
     }
-*/
+
     public void setCoinTrade(IConverterCoin coinTrade) {
         this.coinTrade=coinTrade;
     }

@@ -32,13 +32,13 @@ public class Customer {
     private Map<ECoins,Double> coins;
     DecimalFormat formatter = new DecimalFormat("##########.###");
 
-    private void setBalance(EMoney money, double quantity) {
+    public void setBalance(EMoney money, double quantity) {
         if (balance.containsKey(money))
             balance.replace(money, balance.get(money)+quantity);
         else balance.put(money,quantity);
     }
 
-    private void setCoins(ECoins coin, double quantity) {
+    public void setCoins(ECoins coin, double quantity) {
         if(coins.containsKey(coin))
             coins.replace(coin, coins.get(coin)+quantity);
         else coins.put(coin, quantity);
