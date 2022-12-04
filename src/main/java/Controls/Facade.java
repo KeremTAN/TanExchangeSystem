@@ -3,6 +3,10 @@ package Controls;
 import Models.Banks.ABanks;
 import Models.CoinSystems.ACoinSystem;
 import Models.Customer.Customer;
+import Models.Customer.StrategyTransaction.BanksTransaction.BuyingMoneyFromBank;
+import Models.Customer.StrategyTransaction.BanksTransaction.SellingMoneyToBank;
+import Models.Customer.StrategyTransaction.CoinSystemsTransaction.BuyingCoinFromCoinSystem;
+import Models.Customer.StrategyTransaction.CoinSystemsTransaction.SellingCoinToCoinSystem;
 import Models.Factory.*;
 import Models.Markets.*;
 import Models.StrategyConvert.CoinConverter.ConvertToCoin;
@@ -18,20 +22,15 @@ public class Facade {
     private ACoinSystem processCoinSystem;
     private Random r = new Random();
 
-/*
-//    private ABanks yapiKrediBank = YapiKrediBank.getInstance();
-//    private ABanks tcIsBank = TurkiyeCumIsBank.getInstance();
-//    private ACoinSystem binance = Binance.getInstance();
-//    private ACoinSystem kuCoin = KuCoin.getInstance();
-*/
-
     private Facade(){ }
 
     public static Facade getInstance(){
         if(instance==null) {
             synchronized (Facade.class){
-                instance=new Facade();
-                System.out.println("FACADE INSTANCE CREATED!!");
+                if(instance==null) {
+                    instance = new Facade();
+                    System.out.println("FACADE INSTANCE CREATED!!");
+                }
             }
         }
         else System.out.println("YOU HAVE ALREADY FACADE INSTANCE!");
@@ -55,14 +54,15 @@ public class Facade {
         processBank = new BankFactory().setBank();
         processBank.setMoneyTrade(new ConvertToCurrency());
         EMoney m = new MoneyFactory().setMoney();
-        customer.buyMoneyFromBank(m, tryQuantity, processBank);
+        new BuyingMoneyFromBank().transaction(customer,m,tryQuantity,processBank);
+
     }
 
     public void customerSellsCurrency(Customer customer, double currencyQuantity){
         processBank = new BankFactory().setBank();
         processBank.setMoneyTrade(new ConvertToTRY());
         EMoney m = new MoneyFactory().setMoney();
-        customer.sellMoneyToBank(m, currencyQuantity, processBank);
+        new SellingMoneyToBank().transaction(customer, m, currencyQuantity, processBank);
 
     }
 
@@ -84,14 +84,14 @@ public class Facade {
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
         processCoinSystem.setCoinTrade(new ConvertToCoin());
         ECoins c = new CoinFactory().setCoin();
-        customer.buyCoinFromSystem(c, usdtQuantity, processCoinSystem);
+        new BuyingCoinFromCoinSystem().transaction(customer, c, usdtQuantity, processCoinSystem);
     }
 
     public void customerSellsCoin(Customer customer, double coinQuantity){
         processCoinSystem = new CoinSystemsFactory().setCoinSystem();
         processCoinSystem.setCoinTrade(new ConvertToUsdt());
         ECoins c = new CoinFactory().setCoin();
-        customer.sellCoinToSystem(c, coinQuantity, processCoinSystem);
+        new SellingCoinToCoinSystem().transaction(customer, c, coinQuantity, processCoinSystem);
 
     }
 
