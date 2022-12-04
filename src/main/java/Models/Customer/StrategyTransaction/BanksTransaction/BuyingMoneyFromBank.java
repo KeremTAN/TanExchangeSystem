@@ -4,7 +4,7 @@ import Models.Banks.ABanks;
 import Models.Customer.Customer;
 import Models.Markets.EMoney;
 
-public class BuyingMoneyTransaction implements IBankTransaction {
+public class BuyingMoneyFromBank implements IBankTransaction {
     @Override
     public void transaction(Customer cus, EMoney money, double tryQuantity, ABanks processBank) {
         if (cus.getBalance().containsKey(EMoney.TRY)) {
